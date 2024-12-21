@@ -135,9 +135,34 @@ local function setup()
 	)
 end
 
+local function stop_server()
+	local project_root = get_spring_boot_project_root()
+
+	if not project_root then
+		print("Not in a Spring Boot project")
+		return
+	end
+
+	-- Busca el proceso que ejecuta Spring Boot en el puerto 8080
+	local cmd = "lsof -t -i:8080"
+	local pid = vim.fn.system(cmd):gsub("%s+", "")
+
+	if pid == "" then
+		print("No Spring Boot server is running on port 8080")
+		return
+	end
+
+	-- Envía la señal de terminación al proceso
+	local kill_cmd = "kill -9 " .. pid
+	os.execute(kill_cmd)
+	print("Spring Boot server stopped successfully")
+end
+vim.api.nvim_create_user_command("StopSpringBoot", stop_server, {})
+
 return {
 	setup = setup,
 	boot_run = boot_run,
+	stop_server = stop_server,
 	incremental_compile = incremental_compile,
 	fill_package_details = fill_package_details,
 	foo = foo,
