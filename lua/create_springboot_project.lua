@@ -1,5 +1,5 @@
 -- Dependencies
-local telescope_builtin = require("telescope.builtin")
+local fzf = require("fzf-lua")
 
 -- Constants
 local SPRING_METADATA_URL = "https://start.spring.io/metadata/client"
@@ -115,8 +115,8 @@ local function create_project(config)
 
 			vim.fn.chdir(config.name)
 
-			telescope_builtin.find_files({
-				prompt_title = "Find Main Java File",
+			fzf.files({
+				prompt = "Find Main Java File",
 				cwd = vim.fn.getcwd() .. "/src/main/java",
 				file_ignore_patterns = { "^target/" },
 			})
