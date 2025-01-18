@@ -22,16 +22,16 @@ Basic installation requires nvim-lspconfig and nvim-jdtls to auto compile, and g
 
 ```lua
 return {
-    "elmcgill/springboot-nvim",
-    depedencies = {
-        "neovim/nvim-lspconfig",
-        "mfussenegger/nvim-jdtls",
-        "nvim-tree/nvim-tree.lua",
-    },
-    config = function()
-        local springboot_nvim = require("springboot-nvim")
-        springboot_nvim.setup({})
-    end
+	"elmcgill/springboot-nvim",
+	depedencies = {
+		"neovim/nvim-lspconfig",
+		"mfussenegger/nvim-jdtls",
+		"nvim-tree/nvim-tree.lua",
+	},
+	config = function()
+		local springboot_nvim = require("springboot-nvim")
+		springboot_nvim.setup({})
+	end,
 }
 ```
 
@@ -39,17 +39,21 @@ Recommended installation and configuration
 
 ```lua
 return {
-    "elmcgill/springboot-nvim",
+    "Jhonayo/springboot-nvim",
     depedencies = {
         "neovim/nvim-lspconfig",
         "mfussenegger/nvim-jdtls"
+        "MunifTanjim/nui.nvim",
+        "nvim-telescope/telescope.nvim",
     },
     config = function()
         local springboot_nvim = require("springboot-nvim")
-        vim.keymap.set('n', '<leader>Jr', springboot_nvim.boot_run, {desc = "Spring Boot Run Project"})
-        vim.keymap.set('n', '<leader>Jc', springboot_nvim.generate_class, {desc = "Java Create Class"})
-        vim.keymap.set('n', '<leader>Ji', springboot_nvim.generate_interface, {desc = "Java Create Interface"})
-        vim.keymap.set('n', '<leader>Je', springboot_nvim.generate_enum, {desc = "Java Create Enum"})
+        vim.keymap.set("n", "<leader>Jr", springboot_nvim.boot_run, { desc = "Spring Boot Run Project" })
+        vim.keymap.set("n", "<leader>Js", springboot_nvim.stop_server, { desc = "Spring Boot Stop Project" })
+        vim.keymap.set("n", "<leader>Jc", springboot_nvim.generate_class, { desc = "Java Create Class" })
+        vim.keymap.set("n", "<leader>Ji", springboot_nvim.generate_interface, { desc = "Java Create Interface" })
+        vim.keymap.set("n", "<leader>Je", springboot_nvim.generate_enum, { desc = "Java Create Enum" })
+        vim.keymap.set('n', "<leader>Jn", "<cmd>SpringBootNewProject<cr>", {desc = "New Spring Project"})
         springboot_nvim.setup({})
     end
 }
